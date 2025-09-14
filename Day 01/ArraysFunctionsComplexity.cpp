@@ -126,7 +126,7 @@ int sliding_window_example() {
         max_len = max(max_len, right - left);
     }
 
-    cout << max_len << '\n'; 
+    cout << max_len << '\n';    
     return max_len;
 }
 
