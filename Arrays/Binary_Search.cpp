@@ -1,42 +1,40 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool isPossible(const vector<int>& boxes, int d, int load) {
-    int days = 1;         
-    int currLoad = 0;     
+bool isPossible(const vector<int>& houses, int r) {
+    int wifis = 0;
+    vector<int> housesDone(houses.size());
+    int currHouse = houses[0];
 
-    for (int b : boxes) {
-        if (b > load) return false;
-        if (currLoad + b <= load) {
-            currLoad += b;  
-        } else {
-            days++;               
-            currLoad = b;
-        }
-    }
 
-    return days <= d;
+    return false;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vector<int> boxes = {3, 2, 2, 4, 1};
-    int d = 3;
+    int n, k;
+    cin >> n >> k;
+    vector<int> houses(n);
+    for (int i =0 ; i < n; i++) {
+        cin >> houses[i];
+    }
 
-    int l = *max_element(boxes.begin(), boxes.end());
-    int r = accumulate(boxes.begin(), boxes.end(), 0);
+    sort(houses.begin(), houses.end());
+
+    int l = houses[0];
+    int r = houses.back() - houses.front();
     int result = r;
 
     while (l <= r) {
         int mid = l + (r - l) / 2;
 
-        if (isPossible(boxes, d, mid)) {
+        if (isPossible(houses,  mid)) {
             result = mid;  
-            r = mid - 1;
+            l = mid + 1;
         } else {
-            l = mid + 1;  
+            r = mid - 1;  
         }
     }
 
